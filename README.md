@@ -1,7 +1,5 @@
-# docker-apt-cacher-ng-automated
- This repository provides ready-to-use Ansible playbooks to deploy docker apt-cacher-ng and configure client servers to utilize the cache server.
-
 # apt-cacher-ng Ansible Playbooks
+ This repository provides ready-to-use Ansible playbooks to deploy docker apt-cacher-ng and configure client servers to utilize the cache server.
 
 > **Info: Installs and configures apt-cacher-ng server in Docker, sets up clients to use the proxy, and disables caching for repository keys and signatures to avoid conflicts.**
 
