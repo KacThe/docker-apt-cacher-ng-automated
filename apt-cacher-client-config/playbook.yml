@@ -1,0 +1,18 @@
+---
+- name: Konfiguracja apt aby korzystał z apt-cacher-ng
+  hosts: all   
+  become: yes 
+
+  vars:
+    apt_proxy_host: "192.168.0.1" # Change to your apt-cacher-ng server IP
+    apt_proxy_port: "3142"
+
+  tasks:
+    - name: Utwórz plik 00proxy z konfiguracją proxy
+      copy:
+        dest: /etc/apt/apt.conf.d/00proxy
+        content: |
+          Acquire::http::Proxy "http://{{ apt_proxy_host }}:{{ apt_proxy_port }}";
+        owner: root
+        group: root
+        mode: '0644'

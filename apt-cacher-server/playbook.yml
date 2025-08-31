@@ -1,0 +1,39 @@
+---
+- name: Apt-Cacher NG
+  hosts: all
+  become: true
+  gather_facts: true
+
+  vars:
+    project_dir: /srv/{{ inventory_hostname }}
+    compose_file: "{{ project_dir }}/docker-compose.yaml"
+
+  tasks:
+    - name: Ensure project directory exists
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy docker-compose.yaml
+      template:
+        src: "files/docker-compose.yaml.j2"
+        dest: "{{ project_dir }}/docker-compose.yaml"
+        mode: '0644'
+      
+    - name: Deploy acng.conf template for apt-cacher-ng
+      template:
+        src: "files/acng.conf.j2"
+        dest: "{{ project_dir }}/acng.conf"
+        mode: '0644'
+
+    - name: Stop and remove existing apt-cacher-ng containers
+      command: docker compose down
+      args:
+        chdir: "{{ project_dir }}"
+      ignore_errors: true
+
+    - name: Start apt-cacher-ng containers
+      command: docker compose up -d
+      args:
+        chdir: "{{ project_dir }}"

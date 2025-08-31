@@ -1,0 +1,2 @@
+[all]
+prod-apt-cacher ansible_host=192.168.0.4 ansible_user=admin
