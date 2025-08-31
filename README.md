@@ -23,10 +23,10 @@
 - The **client playbook** deploys apt proxy configuration to multiple machines, so their package manager traffic is routed through your caching proxy.
 - Configuration additions in `acng.conf.j2` ensure apt-cacher-ng does **not cache repository signatures or keys** to prevent update/verification conflicts:
 
-DontCacheResolved: .*InRelease
-DontCacheResolved: .*Release
-DontCacheResolved: .*gpg
-DontCacheResolved: .*sig
+DontCacheResolved: .*InRelease</br>
+DontCacheResolved: .*Release</br>
+DontCacheResolved: .*gpg</br>
+DontCacheResolved: .*sig</br>
 
 
 ---
